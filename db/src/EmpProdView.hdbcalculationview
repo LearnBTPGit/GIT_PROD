@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="EmpProdView" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="EmpProdView"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="Employee">
+    <resourceUri>Employee</resourceUri>
+  </DataSource>
+  <DataSource id="PRODPLACE">
+    <resourceUri>PRODPLACE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="S_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="DEPARTMENT"/>
+      <viewAttribute id="AGE" aggregationType="sum"/>
+      <viewAttribute id="SALARY" aggregationType="sum"/>
+      <viewAttribute id="PLACE"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute hidden="true" id="JOIN$S_NO$S_NO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Employee">
+      <mapping xsi:type="Calculation:AttributeMapping" target="S_NO" source="S_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT" source="DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AGE" source="AGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALARY" source="SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+    </input>
+    <input node="PRODPLACE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLACE" source="PLACE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+    </input>
+    <joinAttribute name="JOIN$S_NO$S_NO"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="S_NO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="S_NO"/>
+      <keyMapping columnObjectName="Join_1" columnName="S_NO"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="DEPARTMENT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENT"/>
+    </attribute>
+    <attribute id="PLACE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PLACE"/>
+      <keyMapping columnObjectName="Join_1" columnName="PLACE"/>
+    </attribute>
+    <attribute id="PRODUCT" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AGE" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="AGE"/>
+      <measureMapping columnObjectName="Join_1" columnName="AGE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="SALARY" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SALARY"/>
+      <measureMapping columnObjectName="Join_1" columnName="SALARY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Employee" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape modelObjectName="PRODPLACE" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
